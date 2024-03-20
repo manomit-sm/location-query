@@ -13,7 +13,7 @@ WORKDIR $HOME
 ADD . $HOME
 RUN chmod +x mvnw
 RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean install
-ARG JAR_FILE=/usr/app/target/LOCATION_QUERY.jar
+ARG JAR_FILE=$HOME/target/LOCATION_QUERY.jar
 COPY $JAR_FILE /app/runner.jar
 EXPOSE 8083
 ENTRYPOINT java -jar /app/runner.jar
