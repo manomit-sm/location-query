@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: location-query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: location-query
+  template:
+    metadata:
+      labels:
+        app: location-query
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: location-query
+          image: locationacrmm.azurecr.io/location-query:latest
+          ports:
+            - containerPort: 8083
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: location-query-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8083
+  selector:
+    app: location-query
