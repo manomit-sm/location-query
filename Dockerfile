@@ -11,4 +11,5 @@ WORKDIR /app
 ADD . .
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
+EXPOSE 8081
 CMD ["./mvnw", "spring-boot:run"]
